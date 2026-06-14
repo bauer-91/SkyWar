@@ -1,4 +1,7 @@
 import pygame.image
+from pygame import Surface, Rect
+from pygame.font import Font
+
 
 class Menu:
     def __init__(self, window):
@@ -11,9 +14,22 @@ class Menu:
         pygame.mixer.music.play(-1)
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
+            self.menu_text(60, "Sky War", (180, 235, 255), (288, 140))
+            self.menu_text(20, "UM JOGADOR", (180, 235, 255), (288, 200))
+            self.menu_text(20, "DOIS JOGADORES", (180, 235, 255), (288, 220))
+            self.menu_text(20, "SCORE", (180, 235, 255), (288, 240))
+            self.menu_text(20, "SAIR", (180, 235, 255), (288, 260))
+            self.menu_text(15, "Desenvolvido por Matias Bauer - RU:5221804", (180, 235, 255), (288, 300))
+
             pygame.display.flip()
             # Check for all events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()  # Close Window
                     quit()  # End pygame
+
+    def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+        text_font: Font = pygame.font.SysFont(name="Pixelify Sans Bold", size=text_size)
+        text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
+        text_rect: Rect = text_surf.get_rect(center=text_center_pos)
+        self.window.blit(source=text_surf, dest=text_rect)
