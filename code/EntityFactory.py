@@ -10,4 +10,5 @@ class EntityFactory:
                 list_bg = []
                 for i in range (1,5):
                     list_bg.append(Background(f'background1-{i}', (0, 0)))
+                    list_bg.append(Background(f'background1-{i}', (576, 0)))
                 return list_bg

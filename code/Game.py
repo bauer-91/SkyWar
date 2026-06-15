@@ -17,8 +17,6 @@ class Game:
             if menu_return == 0:
                 level = Level(self.window, 'Level 1', menu_return)
                 level_return = level.run()
-            elif menu_return == 1:
-                pass
-            elif menu_return == 2:
+            else:
                 pygame.quit()
                 quit()

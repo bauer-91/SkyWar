@@ -16,19 +16,13 @@ class Menu:
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
             self.menu_text(60, "Sky War", (180, 235, 255), (288, 140))
-            for i in range(2):
+            for i in range(1):
                 if menu_option == 0:
                     self.menu_text(20, "INICIAR JOGO", (0, 255, 200), (288, 200))
-                    self.menu_text(20, "SCORE", (180, 235, 255), (288, 220))
-                    self.menu_text(20, "SAIR", (180, 235, 255), (288, 240))
-                elif menu_option == 1:
-                    self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
-                    self.menu_text(20, "SCORE", (0, 255, 200), (288, 220))
-                    self.menu_text(20, "SAIR", (180, 235, 255), (288, 240))
+                    self.menu_text(20, "SAIR", (180, 235, 255), (288, 220))
                 else:
                     self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
-                    self.menu_text(20, "SCORE", (180, 235, 255), (288, 220))
-                    self.menu_text(20, "SAIR", (0, 255, 200), (288, 240))
+                    self.menu_text(20, "SAIR", (0, 255, 200), (288, 220))
             self.menu_text(15, "COMANDOS DO MENU - Selecionar opção: Setas direcionais / Selecionar: Enter", (180, 235, 255), (288, 270))
             self.menu_text(15, "COMANDOS DO JOGO - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255), (288, 280))
             self.menu_text(15, "Desenvolvido por Matias Bauer - RU:5221804", (180, 235, 255), (288, 310))
@@ -41,7 +35,7 @@ class Menu:
                     quit()  # End pygame
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_DOWN:
-                        if menu_option != 2:
+                        if menu_option != 1:
                             menu_option += 1
                         else:
                             menu_option = 0
@@ -49,7 +43,7 @@ class Menu:
                         if menu_option != 0:
                             menu_option -= 1
                         else:
-                            menu_option = 2
+                            menu_option = 1
                     if event.key == pygame.K_RETURN:
                         return menu_option
 
