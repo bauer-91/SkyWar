@@ -29,9 +29,10 @@ class Menu:
                     self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
                     self.menu_text(20, "SCORE", (180, 235, 255), (288, 220))
                     self.menu_text(20, "SAIR", (0, 255, 200), (288, 240))
-
-            self.menu_text(15, "COMANDOS - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255), (288, 270))
-            self.menu_text(15, "Desenvolvido por Matias Bauer - RU:5221804", (180, 235, 255), (288, 300))
+            self.menu_text(15, "COMANDOS DO MENU - Selecionar opção: Setas direcionais / Selecionar: Enter", (180, 235, 255), (288, 270))
+            self.menu_text(15, "COMANDOS DO JOGO - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255), (288, 280))
+            self.menu_text(15, "Desenvolvido por Matias Bauer - RU:5221804", (180, 235, 255), (288, 310))
+            pygame.display.flip()
 
             # Check for all events
             for event in pygame.event.get():
@@ -49,8 +50,8 @@ class Menu:
                             menu_option -= 1
                         else:
                             menu_option = 2
-
-            pygame.display.flip()
+                    if event.key == pygame.K_RETURN:
+                        return menu_option
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Pixelify Sans Bold", size=text_size)
