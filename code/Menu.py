@@ -12,21 +12,45 @@ class Menu:
     def run(self, ):
         pygame.mixer.music.load('./asset/menu.wav')
         pygame.mixer.music.play(-1)
+        menu_option = 0
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
             self.menu_text(60, "Sky War", (180, 235, 255), (288, 140))
-            self.menu_text(20, "UM JOGADOR", (180, 235, 255), (288, 200))
-            self.menu_text(20, "DOIS JOGADORES", (180, 235, 255), (288, 220))
-            self.menu_text(20, "SCORE", (180, 235, 255), (288, 240))
-            self.menu_text(20, "SAIR", (180, 235, 255), (288, 260))
+            for i in range(2):
+                if menu_option == 0:
+                    self.menu_text(20, "INICIAR JOGO", (0, 255, 200), (288, 200))
+                    self.menu_text(20, "SCORE", (180, 235, 255), (288, 220))
+                    self.menu_text(20, "SAIR", (180, 235, 255), (288, 240))
+                elif menu_option == 1:
+                    self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
+                    self.menu_text(20, "SCORE", (0, 255, 200), (288, 220))
+                    self.menu_text(20, "SAIR", (180, 235, 255), (288, 240))
+                else:
+                    self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
+                    self.menu_text(20, "SCORE", (180, 235, 255), (288, 220))
+                    self.menu_text(20, "SAIR", (0, 255, 200), (288, 240))
+
+            self.menu_text(15, "COMANDOS - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255), (288, 270))
             self.menu_text(15, "Desenvolvido por Matias Bauer - RU:5221804", (180, 235, 255), (288, 300))
 
-            pygame.display.flip()
             # Check for all events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()  # Close Window
                     quit()  # End pygame
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_DOWN:
+                        if menu_option != 2:
+                            menu_option += 1
+                        else:
+                            menu_option = 0
+                    if event.key == pygame.K_UP:
+                        if menu_option != 0:
+                            menu_option -= 1
+                        else:
+                            menu_option = 2
+
+            pygame.display.flip()
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Pixelify Sans Bold", size=text_size)
