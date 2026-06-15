@@ -1,6 +1,7 @@
 import pygame
 
 from code.Menu import Menu
+from code.Level import Level
 
 class Game:
 
@@ -14,7 +15,8 @@ class Game:
             menu_return = menu.run()
 
             if menu_return == 0:
-                pass
+                level = Level(self.window, 'Level 1', menu_return)
+                level_return = level.run()
             elif menu_return == 1:
                 pass
             elif menu_return == 2:
