@@ -23,8 +23,10 @@ class Menu:
                 else:
                     self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
                     self.menu_text(20, "SAIR", (0, 255, 200), (288, 220))
-            self.menu_text(15, "COMANDOS DO MENU - Selecionar opção: Setas direcionais / Selecionar: Enter", (180, 235, 255), (288, 270))
-            self.menu_text(15, "COMANDOS DO JOGO - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255), (288, 280))
+            self.menu_text(15, "COMANDOS DO MENU - Selecionar opção: Setas direcionais / Selecionar: Enter",
+                           (180, 235, 255), (288, 270))
+            self.menu_text(15, "COMANDOS DO JOGO - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255),
+                           (288, 280))
             self.menu_text(15, "Desenvolvido por Matias Bauer - RU:5221804", (180, 235, 255), (288, 310))
             pygame.display.flip()
 
