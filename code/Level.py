@@ -9,6 +9,7 @@ from pygame.font import Font
 from code.Const import EVENT_ENEMY
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
+from code.EntityMediator import EntityMediator
 
 
 class Level:
@@ -45,6 +46,8 @@ class Level:
             self.level_text(14, f'LEVEL 1 - Timeout: {self.timeout / 1000 :.1f}s', (0, 255, 200), (10, 5))
 
             pygame.display.flip()
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_health(entity_list=self.entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Pixelify Sans Bold", size=text_size)
