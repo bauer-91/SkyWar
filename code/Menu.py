@@ -20,10 +20,12 @@ class Menu:
                 if menu_option == 0:
                     self.menu_text(20, "INICIAR JOGO", (0, 255, 200), (288, 200))
                     self.menu_text(20, "SAIR", (180, 235, 255), (288, 220))
+                    self.menu_text(20, '[                         ]', (0, 255, 200), (288, 200))
                 else:
                     self.menu_text(20, "INICIAR JOGO", (180, 235, 255), (288, 200))
                     self.menu_text(20, "SAIR", (0, 255, 200), (288, 220))
-            self.menu_text(15, "COMANDOS DO MENU - Selecionar opção: Setas direcionais / Selecionar: Enter",
+                    self.menu_text(20, '[          ]', (0, 255, 200), (288, 220))
+            self.menu_text(15, "COMANDOS DO MENU - Escolher opção: Setas direcionais / Selecionar opção: Enter",
                            (180, 235, 255), (288, 270))
             self.menu_text(15, "COMANDOS DO JOGO - Mover nave: Setas direcionais / Atirar: Espaço", (180, 235, 255),
                            (288, 280))
