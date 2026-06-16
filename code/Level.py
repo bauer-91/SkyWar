@@ -1,3 +1,4 @@
+import random
 import sys
 from builtins import print
 
@@ -20,7 +21,7 @@ class Level:
         self.entity_list.extend(EntityFactory.get_entity('background1-'))
         self.entity_list.append(EntityFactory.get_entity('player'))
         self.timeout = 20000
-        pygame.time.set_timer(EVENT_ENEMY, 5000)
+        pygame.time.set_timer(EVENT_ENEMY, random.randint(500, 2000))
 
     def run(self):
         pygame.mixer_music.load(f'asset/level1.wav')
@@ -37,7 +38,10 @@ class Level:
                     sys.exit()
                 if event.type == EVENT_ENEMY:
                     self.entity_list.append(EntityFactory.get_entity('enemy'))
-
+                    pygame.time.set_timer(
+                        EVENT_ENEMY,
+                        random.randint(500, 2000)
+                    )
             self.level_text(14, f'LEVEL 1 - Timeout: {self.timeout / 1000 :.1f}s', (0, 255, 200), (10, 5))
 
             pygame.display.flip()
