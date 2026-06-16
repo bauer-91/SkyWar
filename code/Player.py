@@ -1,6 +1,7 @@
 import pygame
 
 from code.Entity import Entity
+from code.PlayerShot import PlayerShot
 
 
 class Player(Entity):
@@ -22,3 +23,15 @@ class Player(Entity):
         if pressed_key[pygame.K_RIGHT] and self.rect.x < 516:
             self.rect.centerx += 5
         pass
+
+    def shoot(self):
+        pressed_key = pygame.key.get_pressed()
+
+        if pressed_key[pygame.K_SPACE]:
+            return PlayerShot(
+                'playerShot',
+                (
+                    self.rect.right - 41,
+                    self.rect.centery - 30
+                )
+            )

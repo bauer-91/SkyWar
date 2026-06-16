@@ -6,10 +6,12 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import EVENT_ENEMY
+from code.Const import EVENT_ENEMY, EVENT_ENEMY_SHOT
+from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
+from code.Player import Player
 
 
 class Level:
@@ -23,6 +25,7 @@ class Level:
         self.entity_list.append(EntityFactory.get_entity('player'))
         self.timeout = 20000
         pygame.time.set_timer(EVENT_ENEMY, random.randint(500, 2000))
+        pygame.time.set_timer(EVENT_ENEMY_SHOT, 2000)
 
     def run(self):
         pygame.mixer_music.load(f'asset/level1.wav')
@@ -43,6 +46,22 @@ class Level:
                         EVENT_ENEMY,
                         random.randint(500, 2000)
                     )
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        for ent in self.entity_list:
+                            if isinstance(ent, Player):
+                                self.entity_list.append(ent.shoot())
+                                break
+                #if event.type == EVENT_ENEMY:
+                #    enemy = EntityFactory.get_entity('enemy')
+                #    self.entity_list.append(enemy)
+                #    # chance de atirar
+                #    self.entity_list.append(enemy.shoot())
+                if event.type == EVENT_ENEMY_SHOT:
+                    for ent in self.entity_list:
+                        if isinstance(ent, Enemy):
+                            self.entity_list.append(ent.shoot())
+
             self.level_text(14, f'LEVEL 1 - Timeout: {self.timeout / 1000 :.1f}s', (0, 255, 200), (10, 5))
 
             pygame.display.flip()
