@@ -1,6 +1,5 @@
 import random
 import sys
-from builtins import print
 
 import pygame
 from pygame import Surface, Rect
@@ -40,8 +39,8 @@ class Level:
                     if 'background' in ent.name:
                         self.window.blit(ent.surf, ent.rect)
                         ent.move()
-                self.level_text(30,'GAME OVER',(0, 255, 200),(220, 140))
-                self.level_text(20,f'SCORE: {self.final_score}',(0, 255, 200),(250, 165))
+                self.level_text(30, 'GAME OVER', (0, 255, 200), (220, 140))
+                self.level_text(20, f'SCORE: {self.final_score}', (0, 255, 200), (250, 165))
 
                 pygame.display.flip()
 
@@ -87,10 +86,8 @@ class Level:
             for ent in self.entity_list:
                 if isinstance(ent, Player):
                     if ent.health <= 0:
-                       # pygame.quit()
-                       # sys.exit()
-                       self.game_over = True
-                       self.final_score = ent.score
+                        self.game_over = True
+                        self.final_score = ent.score
             EntityMediator.verify_health(entity_list=self.entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
