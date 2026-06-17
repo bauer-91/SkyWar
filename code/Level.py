@@ -24,6 +24,8 @@ class Level:
         self.entity_list.extend(EntityFactory.get_entity('background1-'))
         self.entity_list.append(EntityFactory.get_entity('player'))
         self.timeout = 20000
+        self.game_over = False
+        self.final_score = 0
         pygame.time.set_timer(EVENT_ENEMY, random.randint(500, 2000))
         pygame.time.set_timer(EVENT_ENEMY_SHOT, 2000)
 
@@ -32,6 +34,23 @@ class Level:
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
         while True:
+            if self.game_over:
+                self.window.fill((0, 0, 0))
+                for ent in self.entity_list:
+                    if 'background' in ent.name:
+                        self.window.blit(ent.surf, ent.rect)
+                        ent.move()
+                self.level_text(30,'GAME OVER',(0, 255, 200),(220, 140))
+                self.level_text(20,f'SCORE: {self.final_score}',(0, 255, 200),(250, 165))
+
+                pygame.display.flip()
+
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                continue
+
             clock.tick(60)
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
@@ -68,8 +87,10 @@ class Level:
             for ent in self.entity_list:
                 if isinstance(ent, Player):
                     if ent.health <= 0:
-                        pygame.quit()
-                        sys.exit()
+                       # pygame.quit()
+                       # sys.exit()
+                       self.game_over = True
+                       self.final_score = ent.score
             EntityMediator.verify_health(entity_list=self.entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
