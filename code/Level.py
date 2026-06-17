@@ -37,8 +37,9 @@ class Level:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
                 if ent.name == 'player':
-                    self.level_text(14, f'Player - Health:{ent.health}', (0, 255, 200), (10, 15))
-                    self.level_text(14, f'Player - Score:{ent.score}', (0, 255, 200), (10, 25))
+                    self.level_text(14, f'Player', (0, 255, 200), (10, 15))
+                    self.level_text(14, f'Health:{ent.health}', (0, 255, 200), (10, 25))
+                    self.level_text(14, f'Score:{ent.score}', (0, 255, 200), (10, 35))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -64,6 +65,11 @@ class Level:
 
             pygame.display.flip()
             EntityMediator.verify_collision(entity_list=self.entity_list)
+            for ent in self.entity_list:
+                if isinstance(ent, Player):
+                    if ent.health <= 0:
+                        pygame.quit()
+                        sys.exit()
             EntityMediator.verify_health(entity_list=self.entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
